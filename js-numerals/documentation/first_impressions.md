@@ -11,8 +11,8 @@
 - [ X ] Choose Stack
 - [ X ] Create Business Logic Plan
 - [ X ] Create Wireframes
-- [ ] Create tests (TDD)
-- [ ] Create code that succeed
-- [ ] Refactor
-- [ ] Deploy for demo
+- [ X ] Create tests (TDD)
+- [ X ] Create code that succeed
+- [ X ] Refactor
+- [ X ] Deploy for demo
 
