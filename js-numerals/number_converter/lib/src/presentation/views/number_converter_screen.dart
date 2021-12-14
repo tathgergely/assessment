@@ -10,6 +10,7 @@ class NumberConverterScreen extends View<NumberConverterBloc> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
         child: Container(
@@ -19,71 +20,82 @@ class NumberConverterScreen extends View<NumberConverterBloc> {
           )),
           child: Center(
             child: Padding(
-                padding: const EdgeInsets.all(100),
+                padding: EdgeInsets.all(width * 0.05),
                 child: Column(
                   children: [
                     const AutoSizeText(
                       'Number Converter',
+                      maxFontSize: 60,
+                      minFontSize: 10,
                       style: TextStyle(
-                        fontSize: 60.0,
+                      
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
-                      maxLines: 1,
+                      maxLines: 2,
                     ),
-                    const Expanded(
-                      flex: 4,
-                      child: Spacer(),
-                    ),
-                    SizedBox(
-                      width: 400.0,
-                      child: CustomNumberField(
-                        stream: bloc.number,
-                        onChange: bloc.changeNumber,
-                        hintText: 'Your number',
-                        labelText: 'Number',
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 2,
-                      child: Spacer(),
-                    ),
-                    const AutoSizeText(
-                      'The result is:',
-                      style: TextStyle(
-                        fontSize: 45.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      maxLines: 1,
-                    ),
-                    
-                    StreamBuilder<String>(
-                        stream: bloc.converterResult,
-                        initialData: bloc.initResultText,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return AutoSizeText(
-                              snapshot.data!,
-                              style: const TextStyle(
-                                fontSize: 60.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                              maxLines: 1,
-                            );
-                          } else {
-                            return const AutoSizeText(
-                              'Something went bad. Sorry for the inconvenience.',
-                              style: TextStyle(
-                                fontSize: 60.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                              maxLines: 1,
-                            );
-                          }
-                        })
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 30),
+                          child: SizedBox(
+                            width: width * 0.3,
+                            child: CustomNumberField(
+                              stream: bloc.number,
+                              onChange: bloc.changeNumber,
+                              hintText: 'Your number',
+                              labelText: 'Number',
+                            ),
+                          ),
+                        ),
+                        const AutoSizeText(
+                          'The result is:',
+                          maxFontSize: 60,
+                          minFontSize: 10,
+                          style: TextStyle(
+                            
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          maxLines: 1,
+                        ),
+                        StreamBuilder<String>(
+                            stream: bloc.converterResult,
+                            initialData: bloc.initResultText,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.1),
+                                  child: AutoSizeText(
+                                    snapshot.data!,
+                                    maxFontSize: 60,
+                                    minFontSize: 10,
+                                    style: const TextStyle(
+                                      
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                    maxLines: 5,
+                                  ),
+                                );
+                              } else {
+                                return const AutoSizeText(
+                                  'Something went bad. Sorry for the inconvenience.',
+                                  maxFontSize: 60,
+                                  minFontSize: 10,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  maxLines: 2,
+                                );
+                              }
+                            })
+                      ],
+                    )
                   ],
                 )),
           ),

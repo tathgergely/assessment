@@ -16,6 +16,14 @@ ThemeData mainTheme = ThemeData(
     filled: false,
     fillColor: Color(0x00000000),
 
+    disabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.white,
+          width: 1,
+          style: BorderStyle.solid,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        gapPadding: 4),
     focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.white,
@@ -25,8 +33,14 @@ ThemeData mainTheme = ThemeData(
         borderRadius: BorderRadius.all(Radius.circular(4.0)),
         gapPadding: 4),
 
-    disabledBorder: InputBorder.none,
-    enabledBorder:  InputBorder.none,
+    enabledBorder:  OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.white,
+          width: 1,
+          style: BorderStyle.solid,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        gapPadding: 4)
 
   ),
 );
