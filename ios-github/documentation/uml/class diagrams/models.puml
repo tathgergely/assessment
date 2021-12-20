@@ -1,5 +1,5 @@
-@startuml entities
-title Entities V1.0
+@startuml models
+title Models V1.0
 hide empty members
 class GithubUserData{
     loginName: String
