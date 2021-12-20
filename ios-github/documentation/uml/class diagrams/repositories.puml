@@ -3,7 +3,7 @@ title Repositories V1.0
 hide empty members
 
 abstract Class IGithubRepository{
-    GithubRepository(String token)
+    IGithubRepository(String token)
     -isConfigured : bool
     isConfigured() : bool
     configure(String token): Future<void>
