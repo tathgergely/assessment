@@ -3,3 +3,4 @@ linter:
   rules:
     public_member_api_docs: false
     avoid_void_async: false
+    require_trailing_commas: false
