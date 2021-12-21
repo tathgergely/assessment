@@ -1,0 +1,57 @@
+@startuml business_logic
+title Business logic V1.0
+hide empty members
+
+Class MasterController{
+}
+class DetailsController{
+    id: String
+    DetailsController(String id)
+}
+class GetGithubIssuesUseCase
+{
+
+}
+class GetGithubIssueUseCase
+{
+    
+}
+class GetGithubIssuesUseCaseParameter
+{
+    page : int
+    pageSize: int
+}
+class GetGithubIssueUseCaseParameter
+{
+    id: String
+}
+MasterController --> GetGithubIssuesUseCase
+DetailsController --> GetGithubIssueUseCase
+GetGithubIssueUseCase --> GetGithubIssueUseCaseParameter
+GetGithubIssuesUseCase --> GetGithubIssuesUseCaseParameter
+
+interface IGithubRepository{
+    IGithubRepository(String token)
+    -isConfigured : bool
+    isConfigured() : bool
+    configure(String token): Future<void>
+}
+interface IGetGithubIssues
+{
+    getIssues(int page, int pageSize) : Future<List<GithubIssueData>>
+}    
+interface IGetGithubIssue
+{
+    getIssue(String id) : Future<GithubIssueDetailedData>
+}
+
+
+class GithubRepository
+
+GithubRepository --|> IGetGithubIssues
+GithubRepository --|> IGetGithubIssue
+GithubRepository --|> IGithubRepository
+GetGithubIssueUseCase ..> IGetGithubIssue
+GetGithubIssuesUseCase ..> IGetGithubIssues
+
+@enduml
