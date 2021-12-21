@@ -1,5 +1,5 @@
 @startuml business_logic
-title Business logic V1.0
+title Business logic V2.0
 hide empty members
 
 Class MasterController{
@@ -25,17 +25,7 @@ class GetGithubIssueUseCaseParameter
 {
     id: String
 }
-MasterController --> GetGithubIssuesUseCase
-DetailsController --> GetGithubIssueUseCase
-GetGithubIssueUseCase --> GetGithubIssueUseCaseParameter
-GetGithubIssuesUseCase --> GetGithubIssuesUseCaseParameter
 
-interface IGithubRepository{
-    IGithubRepository(String token)
-    -isConfigured : bool
-    isConfigured() : bool
-    configure(String token): Future<void>
-}
 interface IGetGithubIssues
 {
     getIssues(int page, int pageSize) : Future<List<GithubIssueData>>
@@ -45,12 +35,24 @@ interface IGetGithubIssue
     getIssue(String id) : Future<GithubIssueDetailedData>
 }
 
+class DataGithubRepository
+{
 
-class GithubRepository
+}
+abstract class GithubRepository{
+    GithubRepository(String token)
+    -isConfigured : bool
+    isConfigured() : bool
+    configure(String token): Future<void>
+}
+MasterController ..> GetGithubIssuesUseCase
+DetailsController ..> GetGithubIssueUseCase
+GetGithubIssueUseCase ..> GetGithubIssueUseCaseParameter
+GetGithubIssuesUseCase ..> GetGithubIssuesUseCaseParameter
 
-GithubRepository --|> IGetGithubIssues
-GithubRepository --|> IGetGithubIssue
-GithubRepository --|> IGithubRepository
+GithubRepository ..|> IGetGithubIssues
+GithubRepository ..|> IGetGithubIssue
+DataGithubRepository --|> GithubRepository
 GetGithubIssueUseCase ..> IGetGithubIssue
 GetGithubIssuesUseCase ..> IGetGithubIssues
 
