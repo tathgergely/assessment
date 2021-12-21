@@ -1,0 +1,1 @@
+enum GithubIssueState { open, closed }
