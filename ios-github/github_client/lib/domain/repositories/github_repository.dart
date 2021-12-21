@@ -7,14 +7,19 @@ abstract class GithubRepository implements IGetGithubIssue, IGetGithubIssues {
   GithubRepository(this.token) {
     _init();
   }
-
+  GithubRepository.late();
   void _init() async {
     if (await validateToken(token)) {
       isConfigured = true;
     }
   }
 
-  final String token;
+  void configure(String token) {
+    this.token = token;
+    _init();
+  }
+
+  late String token = '';
   bool isConfigured = false;
 
   Future<bool> validateToken(String token);
