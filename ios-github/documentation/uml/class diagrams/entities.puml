@@ -1,0 +1,38 @@
+@startuml entities
+title Entities V1.0
+hide empty members
+class GithubUserData{
+    loginName: String
+}
+class GithubUserDetailedData{
+    avatar: String
+}
+class Label
+{
+    name : String
+    color : Color
+}
+enum GithubIssueState {
+    Open, Closed
+    }
+
+Class GithubIssueData{
+title : String
+number: int
+creationDate : Date
+}
+Class GithubIssueComment{
+description : String
+}
+Class GithubIssueDetailedData{
+author : GithubUserDetailedData
+
+}
+GithubIssueData ..> Label : labels: List
+GithubIssueDetailedData ..> GithubIssueComment : comments: List
+GithubIssueData ..> GithubUserData : author
+GithubIssueData ..> GithubIssueState : state
+GithubIssueDetailedData ..> GithubUserDetailedData : author
+GithubUserDetailedData --|> GithubUserData
+GithubIssueDetailedData --|> GithubIssueData
+@enduml
