@@ -13,7 +13,7 @@ GithubIssueData _$GithubIssueDataFromJson(Map<String, dynamic> json) =>
       creationDate: DateTime.parse(json['created_at'] as String),
       author: GithubUserData.fromJson(json['user'] as Map<String, dynamic>),
       labels: (json['labels'] as List<dynamic>)
-          .map((e) => Label.fromJson(e as Map<String, dynamic>))
+          .map((dynamic e) => Label.fromJson(e as Map<String, dynamic>))
           .toList(),
       state: $enumDecode(_$GithubIssueStateEnumMap, json['state']),
     );

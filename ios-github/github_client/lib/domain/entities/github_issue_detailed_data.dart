@@ -1,4 +1,3 @@
-import 'package:github_client/domain/entities/github_issue_comment.dart';
 import 'package:github_client/domain/entities/github_issue_data.dart';
 import 'package:github_client/domain/entities/github_issue_state.dart';
 import 'package:github_client/domain/entities/github_user_detailed_data.dart';

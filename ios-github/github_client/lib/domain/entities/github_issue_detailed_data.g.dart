@@ -14,7 +14,7 @@ GithubIssueDetailedData _$GithubIssueDetailedDataFromJson(
       number: json['number'] as int,
       creationDate: DateTime.parse(json['created_at'] as String),
       labels: (json['labels'] as List<dynamic>)
-          .map((e) => Label.fromJson(e as Map<String, dynamic>))
+          .map((dynamic e) => Label.fromJson(e as Map<String, dynamic>))
           .toList(),
       state: $enumDecode(_$GithubIssueStateEnumMap, json['state']),
       title: json['title'] as String,
