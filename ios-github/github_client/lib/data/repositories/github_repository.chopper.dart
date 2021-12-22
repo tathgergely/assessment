@@ -30,22 +30,14 @@ class _$GithubRepository extends GithubRepository {
       {required int page, required int pageSize}) {
     final $url =
         'https://api.github.com/repos/Alamofire/Alamofire/issues?per_page=${pageSize}&page=${page}';
-    final $headers = {
-      'access_token': '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',
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    final $request = Request('GET', $url, client.baseUrl);
     return client.send<List<GithubIssueData>, GithubIssueData>($request);
   }
 
   @override
   Future<Response<bool>> isTokenValid() {
     final $url = 'https://api.github.com/user';
-    final $headers = {
-      'access_token': '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',
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    final $request = Request('GET', $url, client.baseUrl);
     return client.send<bool, bool>($request);
   }
 }

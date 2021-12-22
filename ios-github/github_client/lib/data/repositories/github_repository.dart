@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:chopper/chopper.dart';
+import 'package:flutter/animation.dart';
 import 'package:github_client/data/constants.dart';
 import 'package:github_client/data/converters/json_to_type_converter.dart';
 import 'package:github_client/domain/entities/github_issue_data.dart';
@@ -22,14 +23,13 @@ abstract class GithubRepository extends ChopperService
 
   @Get(
       path: kAlamofireRepositoryEndpoint +
-          '/issues?per_page={pageSize}&page={page}',
-      headers: {'access_token': kGithubToken})
+          '/issues?per_page={pageSize}&page={page}')
   @override
   Future<Response<List<GithubIssueData>>> getIssues(
       {@Path('page') required int page,
       @Path('pageSize') required int pageSize});
 
-  @Get(path: '/user', headers: {'access_token': kGithubToken})
+  @Get(path: '/user')
   Future<Response<bool>> isTokenValid();
 
   static GithubRepository create() {
@@ -41,7 +41,11 @@ abstract class GithubRepository extends ChopperService
               GithubIssueDetailedData.fromJson(jsonData),
           GithubIssueData: (jsonData) => GithubIssueData.fromJson(jsonData)
         }),
-        interceptors: [HttpLoggingInterceptor()]);
+        interceptors: [
+          CurlInterceptor(),
+          const HeadersInterceptor({'authorization': 'token $kGithubToken'}),
+          HttpLoggingInterceptor()
+        ]);
     return _$GithubRepository(client);
   }
 }
