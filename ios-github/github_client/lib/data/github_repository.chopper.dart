@@ -17,14 +17,10 @@ class _$GithubRepository extends GithubRepository {
   final definitionType = GithubRepository;
 
   @override
-  Future<Response<GithubIssueDetailedData>> getIssue({required String number}) {
+  Future<Response<GithubIssueDetailedData>> getIssue({required int number}) {
     final $url =
-        'https://api.github.com/repos/Alamofire/Alamofire+/issues/${number}';
-    final $headers = {
-      'access_token': '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',
-    };
-
-    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+        'https://api.github.com/repos/Alamofire/Alamofire/issues/${number}';
+    final $request = Request('GET', $url, client.baseUrl);
     return client
         .send<GithubIssueDetailedData, GithubIssueDetailedData>($request);
   }
@@ -33,7 +29,7 @@ class _$GithubRepository extends GithubRepository {
   Future<Response<List<GithubIssueData>>> getIssues(
       {required int page, required int pageSize}) {
     final $url =
-        'https://api.github.com/repos/Alamofire/Alamofire+/issues/?per_page=${pageSize}&page=${page}';
+        'https://api.github.com/repos/Alamofire/Alamofire/issues?per_page=${pageSize}&page=${page}';
     final $headers = {
       'access_token': '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',
     };

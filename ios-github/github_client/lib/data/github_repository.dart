@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:chopper/chopper.dart';
 import 'package:github_client/data/constants.dart';
+import 'package:github_client/data/converters/json_to_type_converter.dart';
 import 'package:github_client/domain/entities/github_issue_data.dart';
 import 'package:github_client/domain/entities/github_issue_detailed_data.dart';
 import 'package:github_client/domain/repositories/i_get_github_issue.dart';
@@ -14,16 +15,14 @@ part 'github_repository.chopper.dart';
 @ChopperApi(baseUrl: kGithubBaseURL)
 abstract class GithubRepository extends ChopperService
     implements IGetGithubIssue, IGetGithubIssues {
-  @Get(
-      path: '$kAlamofireRepositoryEndpoint+/issues/{number}',
-      headers: {'access_token': kGithubToken})
+  @Get(path: kAlamofireRepositoryEndpoint + '/issues/{number}')
   @override
   Future<Response<GithubIssueDetailedData>> getIssue(
-      {@Path('number') required String number});
+      {@Path('number') required int number});
 
   @Get(
-      path:
-          '$kAlamofireRepositoryEndpoint+/issues/?per_page={pageSize}&page={page}',
+      path: kAlamofireRepositoryEndpoint +
+          '/issues?per_page={pageSize}&page={page}',
       headers: {'access_token': kGithubToken})
   @override
   Future<Response<List<GithubIssueData>>> getIssues(
@@ -32,4 +31,17 @@ abstract class GithubRepository extends ChopperService
 
   @Get(path: '/user', headers: {'access_token': kGithubToken})
   Future<Response<bool>> isTokenValid();
+
+  static GithubRepository create() {
+    final client = ChopperClient(
+        baseUrl: kGithubBaseURL,
+        services: [_$GithubRepository()],
+        converter: JsonToTypeConverter({
+          GithubIssueDetailedData: (jsonData) =>
+              GithubIssueDetailedData.fromJson(jsonData),
+          GithubIssueData: (jsonData) => GithubIssueData.fromJson(jsonData)
+        }),
+        interceptors: [HttpLoggingInterceptor()]);
+    return _$GithubRepository(client);
+  }
 }
