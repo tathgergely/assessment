@@ -1,3 +1,3 @@
-const kGithubToken = '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';
+const kGithubToken = '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';
 const kGithubBaseURL = 'https://api.github.com';
 const kAlamofireRepositoryEndpoint = '/repos/Alamofire/Alamofire';
