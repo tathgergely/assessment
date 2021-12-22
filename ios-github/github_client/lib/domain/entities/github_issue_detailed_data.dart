@@ -23,6 +23,7 @@ class GithubIssueDetailedData extends GithubIssueData {
             state: state,
             title: title,
             creationDate: creationDate);
+  @JsonKey(name: 'body')
   final String description;
 
   factory GithubIssueDetailedData.fromJson(Map<String, dynamic> json) =>

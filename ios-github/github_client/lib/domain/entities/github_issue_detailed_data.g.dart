@@ -14,11 +14,11 @@ GithubIssueDetailedData _$GithubIssueDetailedDataFromJson(
       number: json['number'] as int,
       creationDate: DateTime.parse(json['created_at'] as String),
       labels: (json['labels'] as List<dynamic>)
-          .map((dynamic e) => Label.fromJson(e as Map<String, dynamic>))
+          .map((e) => Label.fromJson(e as Map<String, dynamic>))
           .toList(),
       state: $enumDecode(_$GithubIssueStateEnumMap, json['state']),
       title: json['title'] as String,
-      description: json['description'] as String,
+      description: json['body'] as String,
     );
 
 Map<String, dynamic> _$GithubIssueDetailedDataToJson(
@@ -30,7 +30,7 @@ Map<String, dynamic> _$GithubIssueDetailedDataToJson(
       'user': instance.author,
       'labels': instance.labels,
       'state': _$GithubIssueStateEnumMap[instance.state],
-      'description': instance.description,
+      'body': instance.description,
     };
 
 const _$GithubIssueStateEnumMap = {
