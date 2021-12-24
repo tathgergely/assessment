@@ -1,5 +1,5 @@
 const kGithubToken =
-    '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'; //TODO: Uncomment and remove '-' between the Js
+    'ghp_yo7nvEpCDQcUrcgqX-7KduUR0BEftgL2QamFL'; //TODO: remove '-' between the X and 7
 const kGithubBaseURL = 'https://api.github.com';
 const kAlamofireRepositoryEndpoint = '/repos/Alamofire/Alamofire';
 const kAppTitle = 'Github Issues View';

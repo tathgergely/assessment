@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:github_client/app/pages/details_view/details_view.dart';
 import 'package:github_client/app/utils/date_time_converter.dart';
 import 'package:github_client/app/widgets/issue_state_image.dart';
+import 'package:github_client/app/widgets/label_chip.dart';
+import 'package:github_client/app/widgets/labels_list.dart';
 import 'package:github_client/domain/entities/github_issue_data.dart';
 
 class IssueCard extends StatelessWidget {
@@ -44,7 +46,8 @@ class IssueCard extends StatelessWidget {
                   Text(' opened${issue.creationDate.recentDate()}'),
                   Text(' by ${issue.author.loginName}')
                 ],
-              )
+              ),
+              LabelsList(labels: issue.labels)
             ],
           ),
         ));
