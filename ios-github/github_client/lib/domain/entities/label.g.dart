@@ -8,7 +8,7 @@ part of 'label.dart';
 
 Label _$LabelFromJson(Map<String, dynamic> json) => Label(
       name: json['name'] as String,
-      color: const ColorSerialiser().fromJson(json['color'] as int),
+      color: const ColorSerialiser().fromJson(json['color'] as String),
     );
 
 Map<String, dynamic> _$LabelToJson(Label instance) => <String, dynamic>{

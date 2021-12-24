@@ -11,7 +11,8 @@ GithubIssueData _$GithubIssueDataFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       number: json['number'] as int,
       creationDate: DateTime.parse(json['created_at'] as String),
-      author: GithubUserData.fromJson(json['user'] as Map<String, dynamic>),
+      author:
+          GithubUserDetailedData.fromJson(json['user'] as Map<String, dynamic>),
       labels: (json['labels'] as List<dynamic>)
           .map((e) => Label.fromJson(e as Map<String, dynamic>))
           .toList(),

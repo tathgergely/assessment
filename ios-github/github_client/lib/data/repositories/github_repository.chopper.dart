@@ -27,9 +27,9 @@ class _$GithubRepository extends GithubRepository {
 
   @override
   Future<Response<List<GithubIssueData>>> getIssues(
-      {required int page, required int pageSize}) {
+      {required int page, required int pageSize, required String state}) {
     final $url =
-        'https://api.github.com/repos/Alamofire/Alamofire/issues?per_page=${pageSize}&page=${page}';
+        'https://api.github.com/repos/Alamofire/Alamofire/issues?state=${state}&per_page=${pageSize}&page=${page}';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<List<GithubIssueData>, GithubIssueData>($request);
   }

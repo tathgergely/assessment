@@ -1,8 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-enum GithubIssueState {
+enum GithubIssueStateFilter {
   @JsonValue('open')
   open,
   @JsonValue('closed')
-  closed
+  closed,
+  @JsonValue('all')
+  all
 }

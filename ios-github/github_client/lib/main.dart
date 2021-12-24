@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:github_client/app/pages/master_view/master_view.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  _setupLogging();
   runApp(const MyApp());
 }
 
@@ -14,6 +17,14 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Text('Skeleton'));
+        debugShowCheckedModeBanner: false,
+        home: MasterView());
   }
+}
+
+void _setupLogging() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((rec) {
+    print('${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
 }

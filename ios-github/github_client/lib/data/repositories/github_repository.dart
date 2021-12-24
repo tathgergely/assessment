@@ -8,6 +8,7 @@ import 'package:github_client/data/constants.dart';
 import 'package:github_client/data/converters/json_to_type_converter.dart';
 import 'package:github_client/domain/entities/github_issue_data.dart';
 import 'package:github_client/domain/entities/github_issue_detailed_data.dart';
+import 'package:github_client/domain/entities/github_issue_state_filter.dart';
 import 'package:github_client/domain/repositories/i_get_github_issue.dart';
 import 'package:github_client/domain/repositories/i_get_github_issues.dart';
 
@@ -23,11 +24,12 @@ abstract class GithubRepository extends ChopperService
 
   @Get(
       path: kAlamofireRepositoryEndpoint +
-          '/issues?per_page={pageSize}&page={page}')
+          '/issues?state={state}&per_page={pageSize}&page={page}')
   @override
   Future<Response<List<GithubIssueData>>> getIssues(
       {@Path('page') required int page,
-      @Path('pageSize') required int pageSize});
+      @Path('pageSize') required int pageSize,
+      @Path('state') required String state});
 
   @Get(path: '/user')
   Future<Response<bool>> isTokenValid();

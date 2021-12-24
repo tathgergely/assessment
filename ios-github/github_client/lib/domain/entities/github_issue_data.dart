@@ -1,5 +1,5 @@
 import 'package:github_client/domain/entities/github_issue_state.dart';
-import 'package:github_client/domain/entities/github_user_data.dart';
+import 'package:github_client/domain/entities/github_user_detailed_data.dart';
 import 'package:github_client/domain/entities/label.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -20,7 +20,7 @@ class GithubIssueData {
   @JsonKey(name: 'created_at')
   final DateTime creationDate;
   @JsonKey(name: 'user')
-  final GithubUserData author;
+  final GithubUserDetailedData author;
   final List<Label> labels;
   final GithubIssueState state;
 

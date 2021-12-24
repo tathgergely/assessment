@@ -2,12 +2,27 @@ import 'dart:ui';
 
 import 'package:json_annotation/json_annotation.dart';
 
-class ColorSerialiser implements JsonConverter<Color, int> {
+class ColorSerialiser implements JsonConverter<Color, String> {
   const ColorSerialiser();
 
   @override
-  Color fromJson(int json) => Color(json);
+  Color fromJson(String json) => HexColor.fromHex(json);
 
   @override
-  int toJson(Color color) => color.value;
+  String toJson(Color color) => color.toHex();
+}
+
+extension HexColor on Color {
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }
